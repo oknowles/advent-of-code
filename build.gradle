@@ -1,4 +1,4 @@
-group 'advent-of-code-2017'
+group 'adventOfCode2017'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
