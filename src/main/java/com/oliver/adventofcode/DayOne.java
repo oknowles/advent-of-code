@@ -7,7 +7,7 @@ public class DayOne {
     private int[] input;
 
     public DayOne(String stringInput) {
-        this.input = Utils.stringToIntArray(stringInput);
+        this.input = Utils.stringToSingleDigitArray(stringInput);
     }
 
     public static DayOne fromInput() {
