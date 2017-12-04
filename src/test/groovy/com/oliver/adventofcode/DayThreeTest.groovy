@@ -31,10 +31,10 @@ class DayThreeTest extends Specification {
             int result = underTest.getManhattanDistance(input)
 
         then:
-            result == expected
+            result == expectedResult
 
         where:
-            input | expected
+            input | expectedResult
             1     | 0
             12    | 3
             23    | 2
