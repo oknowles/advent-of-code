@@ -6,8 +6,8 @@ Solutions for [Advent of Code 2017](adventofcode.com)
 | [1](http://adventofcode.com/2017/day/1) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/DayOne.java) |
 | [2](http://adventofcode.com/2017/day/2) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/DayTwo.java) |
 | [3](http://adventofcode.com/2017/day/3) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/DayThree.java) |
-| [4](http://adventofcode.com/2017/day/4) |  |
-| [5](http://adventofcode.com/2017/day/5) |  |
+| [4](http://adventofcode.com/2017/day/4) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/DayFour.java) |
+| [5](http://adventofcode.com/2017/day/5) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/DayFive.java) |
 | [6](http://adventofcode.com/2017/day/6) |  |
 | [7](http://adventofcode.com/2017/day/7) |  |
 | [8](http://adventofcode.com/2017/day/8) |  |
