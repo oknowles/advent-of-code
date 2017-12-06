@@ -8,7 +8,7 @@ class Day4Test extends Specification {
 
     private Day4 underTest
 
-    def "run day four"() {
+    def "run day 4"() {
         given:
             underTest = Day4.fromInput()
 

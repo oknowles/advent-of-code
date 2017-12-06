@@ -12,7 +12,7 @@ class Day3Test extends Specification {
         underTest = new Day3()
     }
 
-    def "run day three"() {
+    def "run day 3"() {
         given:
             int input = 325489
 

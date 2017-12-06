@@ -1,11 +1,10 @@
 package com.oliver.adventofcode;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Day6 {
+    
+    private static List<Integer> INPUT = Arrays.asList(4, 10, 4, 1, 8, 4, 9, 14, 5, 1, 14, 15, 0, 15, 3, 5);
 
     private List<Integer> memoryBanks;
 
@@ -13,25 +12,44 @@ public class Day6 {
         this.memoryBanks = memoryBanks;
     }
 
-    public int getRedistributionCycles() {
-        Set<List<Integer>> seenStates = new HashSet<>();
-        redistributionCycle(seenStates);
+    public static Day6 fromInput() {
+        return new Day6(INPUT);
+    }
 
-        int cycles = 1;
-        while (!seenStates.contains(memoryBanks)) {
-            redistributionCycle(seenStates);
+    public int getTotalRedistributionCycles() {
+        return getCycleCountUntilLoop(new HashMap<>());
+    }
+
+    public int getLoopRedistributionCycles() {
+        Map<List<Integer>, Integer> cycleSeenForState = new HashMap<>();
+        int cycles = getCycleCountUntilLoop(cycleSeenForState);
+
+        return cycles - cycleSeenForState.get(memoryBanks);
+    }
+
+    private int getCycleCountUntilLoop(Map<List<Integer>, Integer> cycleSeenForState) {
+        int cycles = 0;
+        redistributionCycle(cycleSeenForState, cycles);
+        cycles++;
+
+        while (unseenState(cycleSeenForState)) {
+            redistributionCycle(cycleSeenForState, cycles);
             cycles++;
         }
         return cycles;
     }
 
-    private void redistributionCycle(Set<List<Integer>> seenStates) {
-        addState(memoryBanks, seenStates);
+    private boolean unseenState(Map<List<Integer>, Integer> cycleSeenForState) {
+        return cycleSeenForState.get(memoryBanks) == null;
+    }
+
+    private void redistributionCycle(Map<List<Integer>, Integer> cycleSeenForState, int curCycle) {
+        addState(memoryBanks, curCycle, cycleSeenForState);
         redistribute(getMaxPos());
     }
 
-    private void addState(List<Integer> state, Set<List<Integer>> seenStates) {
-        seenStates.add(new ArrayList<>(state));
+    private void addState(List<Integer> state, int curCycle, Map<List<Integer>, Integer> cycleSeenForState) {
+        cycleSeenForState.put(new ArrayList<>(state), curCycle);
     }
 
     private int getMaxPos() {
