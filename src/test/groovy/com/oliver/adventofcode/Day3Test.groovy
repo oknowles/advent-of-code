@@ -4,12 +4,12 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 
-class DayThreeTest extends Specification {
+class Day3Test extends Specification {
 
-    private DayThree underTest
+    private Day3 underTest
 
     def setup() {
-        underTest = new DayThree()
+        underTest = new Day3()
     }
 
     def "run day three"() {

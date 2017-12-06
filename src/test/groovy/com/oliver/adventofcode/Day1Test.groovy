@@ -3,13 +3,13 @@ package com.oliver.adventofcode
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class DayOneTest extends Specification {
+class Day1Test extends Specification {
 
-    private DayOne underTest
+    private Day1 underTest
 
     def "run day one"() {
         given:
-            underTest = DayOne.fromInput()
+            underTest = Day1.fromInput()
 
         when:
             long firstHalf = underTest.getSumAdjacentMatches()
@@ -23,7 +23,7 @@ class DayOneTest extends Specification {
     @Unroll
     def "successfully return answer for first half for input #stringInput"() {
         given:
-            underTest = new DayOne(stringInput)
+            underTest = new Day1(stringInput)
 
         when:
             long result = underTest.getSumAdjacentMatches()
@@ -42,7 +42,7 @@ class DayOneTest extends Specification {
     @Unroll
     def "successfully return answer for second half for input #stringInput"() {
         given:
-            underTest = new DayOne(stringInput)
+            underTest = new Day1(stringInput)
 
         when:
             long result = underTest.getSumHalfMatches()

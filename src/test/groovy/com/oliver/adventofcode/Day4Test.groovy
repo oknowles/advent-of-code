@@ -4,13 +4,13 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 
-class DayFourTest extends Specification {
+class Day4Test extends Specification {
 
-    private DayFour underTest
+    private Day4 underTest
 
     def "run day four"() {
         given:
-            underTest = DayFour.fromInput()
+            underTest = Day4.fromInput()
 
         when:
             long firstHalf = underTest.getUniquePassphraseCount()
@@ -24,7 +24,7 @@ class DayFourTest extends Specification {
     @Unroll
     def "successfully return valid input when input = #input"() {
         given:
-            underTest = new DayFour([input as String[]])
+            underTest = new Day4([input as String[]])
 
         when:
             long result = underTest.getUniquePassphraseCount()
@@ -43,7 +43,7 @@ class DayFourTest extends Specification {
     @Unroll
     def "successfully return #expectedResult for non anagram count when = #input"() {
         given:
-            underTest = new DayFour([input as String[]])
+            underTest = new Day4([input as String[]])
 
         when:
             long result = underTest.getNonAnagramPassphraseCount()

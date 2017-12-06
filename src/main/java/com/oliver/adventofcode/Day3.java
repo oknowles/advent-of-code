@@ -3,7 +3,7 @@ package com.oliver.adventofcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DayThree {
+public class Day3 {
 
     public int getManhattanDistance(int location) {
         int sideLength = 1;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DayTwo {
+public class Day2 {
 
     private static String INPUT = "1224\t926\t1380\t688\t845\t109\t118\t88\t1275\t1306\t91\t796\t102\t1361\t27\t995\n" +
             "1928\t2097\t138\t1824\t198\t117\t1532\t2000\t1478\t539\t1982\t125\t1856\t139\t475\t1338\n" +
@@ -25,18 +25,18 @@ public class DayTwo {
 
     private List<int[]> input;
 
-    public DayTwo(List<int[]> input) {
+    public Day2(List<int[]> input) {
         this.input = input;
     }
 
-    public static DayTwo fromInput() {
+    public static Day2 fromInput() {
         String[] rows = INPUT.split("\n");
         List<int[]> input = new ArrayList<>();
 
         for (String row : rows) {
             input.add(Utils.stringToArray(row, "\t"));
         }
-        return new DayTwo(input);
+        return new Day2(input);
     }
 
     public long getChecksum() {

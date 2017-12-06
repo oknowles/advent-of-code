@@ -3,13 +3,13 @@ package com.oliver.adventofcode
 import spock.lang.Specification
 
 
-class DayFiveTest extends Specification {
+class Day5Test extends Specification {
 
-    private DayFive underTest
+    private Day5 underTest
 
     def "run day five"() {
         given:
-            underTest = DayFive.fromInput()
+            underTest = Day5.fromInput()
 
         when:
             int firstHalf = underTest.getFirstHalfJumps()
@@ -22,7 +22,7 @@ class DayFiveTest extends Specification {
 
     def "successfully return number of jumps for first half"() {
         given:
-            underTest = new DayFive([0, 3, 0, 1, -3] as int[])
+            underTest = new Day5([0, 3, 0, 1, -3] as int[])
 
         when:
             int result = underTest.getFirstHalfJumps()
@@ -33,7 +33,7 @@ class DayFiveTest extends Specification {
 
     def "successfully return number of jumps for second half"() {
         given:
-            underTest = new DayFive([0, 3, 0, 1, -3] as int[])
+            underTest = new Day5([0, 3, 0, 1, -3] as int[])
 
         when:
             int result = underTest.getSecondHalfJumps()

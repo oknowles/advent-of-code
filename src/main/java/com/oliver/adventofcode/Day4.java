@@ -3,7 +3,7 @@ package com.oliver.adventofcode;
 import java.util.*;
 import java.util.function.Function;
 
-public class DayFour {
+public class Day4 {
 
     private static final String INPUT = "sayndz zfxlkl attjtww cti sokkmty brx fhh suelqbp\n" +
             "xmuf znkhaes pggrlp zia znkhaes znkhaes\n" +
@@ -520,17 +520,17 @@ public class DayFour {
 
     private List<String[]> passphraseWords;
 
-    public DayFour(List<String[]> passphraseWords) {
+    public Day4(List<String[]> passphraseWords) {
         this.passphraseWords = passphraseWords;
     }
 
-    public static DayFour fromInput() {
+    public static Day4 fromInput() {
         String[] passphrases = INPUT.split("\n");
         List<String[]> passphraseWords = new ArrayList<>();
         for (String passphrase : passphrases) {
             passphraseWords.add(passphrase.split("\\s"));
         }
-        return new DayFour(passphraseWords);
+        return new Day4(passphraseWords);
     }
 
     public long getUniquePassphraseCount() {
