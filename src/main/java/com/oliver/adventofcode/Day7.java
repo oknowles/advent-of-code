@@ -1,8 +1,6 @@
 package com.oliver.adventofcode;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Day7 {
 
@@ -1459,141 +1457,175 @@ public class Day7 {
             "negkd (266) -> zwoot, mpmue\n" +
             "ykudi (46)";
 
-    private List<Instruction> instructions;
+    private Node root;
 
-    public Day7(List<Instruction> instructions) {
-        this.instructions = instructions;
+    public Day7(List<String> instructions) {
+        this.root = buildTree(instructions);
     }
 
     public static Day7 fromInput() {
-        List<Instruction> instructions = new ArrayList<>();
-        String[] inputs = INPUT.split("\n");
-        for (String input : inputs) {
-            String[] parts = input.split(" -> ");
-            String[] parentParts = parts[0].split("\\s");
-            String parent = parentParts[0];
-            int parentWeight = Integer.parseInt(parentParts[1].replaceAll("[()]", ""));
-            if (parts.length == 1) {
-                instructions.add(new Instruction(parent, parentWeight));
-            } else {
-                List<String> children = Arrays.asList(parts[1].split(", "));
-                instructions.add(new Instruction(parent, parentWeight, children));
-            }
-        }
+        List<String> instructions = Arrays.asList(INPUT.split("\n"));
         return new Day7(instructions);
     }
 
     public String getBottomProgram() {
-        // parse as list
-        Map<String, String> childToParent = new HashMap<>();
-        for (Instruction instruction : instructions) {
-            // go through list
-            // we know something is at the bottom of the tree
-            for (String child : instruction.getChildren()) {
-                childToParent.put(child, instruction.getProgram());
-            }
-        }
-        String curProgram = instructions.get(0).getProgram();
-        while (childToParent.containsKey(curProgram)) {
-            curProgram = childToParent.get(curProgram);
-        }
-
-        Map<String, Instruction> instructionMap = instructions.stream()
-                .collect(Collectors.toMap(
-                        Instruction::getProgram,
-                        Function.identity()));
-
-        iterateThroughTree(childToParent, instructionMap);
-
-        return curProgram;
+        return root.getName();
     }
 
-    private void iterateThroughTree(Map<String, String> childToParent, Map<String, Instruction> instructionMap) {
-        List<Instruction> currentLevelInstructions = getLeafPrograms();
-        List<Instruction> nextLevelInstructions = new ArrayList<>();
+    public int getCorrectWeight() {
+        computeCumulativeWeights();
 
-        int level = 0;
-        while (!currentLevelInstructions.isEmpty()) {
-            int currentWeight = currentLevelInstructions.get(0).programWeight;
-            System.out.println("Level weight = " + currentWeight);
-            for (Instruction instruction : currentLevelInstructions) {
-                // update parent weight
-                String parentProgram = childToParent.get(instruction.getProgram());
-                if (parentProgram != null) {
-                    Instruction parent = instructionMap.get(parentProgram);
-                    parent.programWeight += instruction.programWeight;
-                    nextLevelInstructions.add(parent);
-                }
-            }
-            currentLevelInstructions = nextLevelInstructions;
-            nextLevelInstructions = new ArrayList<>();
-            level++;
+        Node curNode = root;
+        Node incorrectChild = getIncorrectNode(curNode.getChildren());
+
+        while (incorrectChild != null) {
+            curNode = incorrectChild;
+            incorrectChild = getIncorrectNode(incorrectChild.getChildren());
         }
 
-        currentLevelInstructions = getLeafPrograms();
-        nextLevelInstructions = new ArrayList<>();
-        level = 0;
-        while (!currentLevelInstructions.isEmpty()) {
-            for (Instruction instruction : currentLevelInstructions) {
-                if (currentLevelInstructions.isEmpty()) {
-                    continue;
-                }
-                int curWeight = currentLevelInstructions.get(0).getProgramWeight();
-                for (String childProgram : instruction.getChildren()) {
-                    int childWeight = instructionMap.get(childProgram).getProgramWeight();
-                    if (childWeight != curWeight) {
-                        System.out.println("Level " + level + ". Wrong weight for " + childProgram);
+        int weightDiff = curNode.getBalancedCumulativeWeight() - curNode.getCumulativeWeight();
+        return curNode.getWeight() + weightDiff;
+    }
+
+    private Node buildTree(List<String> instructions) {
+        Map<String, Node> parentlessNodes = new HashMap<>();
+        Map<String, Node> partialChildNodes = new HashMap<>();
+        for (String input : instructions) {
+            String[] parts = input.split(" -> ");
+            String[] parentParts = parts[0].split("\\s");
+            String name = parentParts[0];
+            int weight = Integer.parseInt(parentParts[1].replaceAll("[()]", ""));
+
+            Node curNode;
+            if (partialChildNodes.containsKey(name)) {
+                // a previous child of another node so can use that and remove from map
+                curNode = partialChildNodes.get(name);
+                curNode.setWeight(weight);
+                partialChildNodes.remove(name);
+            } else {
+                // no currently known parents so add to parentless map
+                curNode = new Node(name, weight);
+                parentlessNodes.put(name, curNode);
+            }
+
+            if (parts.length > 1) {
+                List<String> children = Arrays.asList(parts[1].split(", "));
+                for (String child : children) {
+                    Node childNode;
+                    if (parentlessNodes.containsKey(child)) {
+                        // child was previously parentless but now not
+                        childNode = parentlessNodes.get(child);
+                        parentlessNodes.remove(child);
+                    } else {
+                        childNode = new Node(child);
+                        partialChildNodes.put(child, childNode);
                     }
-                }
-                String parentProgram = childToParent.get(instruction.getProgram());
-                if (parentProgram != null) {
-                    Instruction parent = instructionMap.get(parentProgram);
-                    nextLevelInstructions.add(parent);
+
+                    curNode.addChild(childNode);
                 }
             }
-            currentLevelInstructions = nextLevelInstructions;
-            nextLevelInstructions = new ArrayList<>();
-            level++;
         }
+        return parentlessNodes.values().stream().findFirst().get();
     }
 
-    public List<Instruction> getLeafPrograms() {
-        return instructions.stream()
-                .filter(Instruction::isLeaf)
-                .collect(Collectors.toList());
+    private Node getIncorrectNode(List<Node> nodes) {
+        Map<Integer, Integer> cumulativeWeightCount = new HashMap<>();
+        for (Node node : nodes) {
+            int weightCount = cumulativeWeightCount.getOrDefault(node.getCumulativeWeight(), 0);
+            cumulativeWeightCount.put(node.getCumulativeWeight(), weightCount + 1);
+        }
+
+        if (cumulativeWeightCount.size() == 1) {
+            return null;
+        }
+
+        int mostCommonWeightCount = -1;
+        int mostCommonWeight = -1;
+        for (Map.Entry<Integer, Integer> entry : cumulativeWeightCount.entrySet()) {
+            if (entry.getValue() > mostCommonWeightCount) {
+                mostCommonWeight = entry.getKey();
+                mostCommonWeightCount = entry.getValue();
+            }
+        }
+
+        for (Node node : nodes) {
+            if (node.getCumulativeWeight() != mostCommonWeight) {
+                node.setBalancedCumulativeWeight(mostCommonWeight);
+                return node;
+            }
+        }
+        return null;
     }
 
-    static class Instruction {
-        private String program;
-        private int programWeight;
-        private List<String> children;
+    private void computeCumulativeWeights() {
+        getCumulativeWeight(root);
+    }
 
-        public Instruction(String program, int programWeight) {
-            this.program = program;
-            this.programWeight = programWeight;
-            this.children = Collections.emptyList();
+    private int getCumulativeWeight(Node curNode) {
+        if (curNode.getChildren().isEmpty()) {
+            return curNode.getWeight();
         }
 
-        public Instruction(String program, int programWeight, List<String> children) {
-            this.program = program;
-            this.programWeight = programWeight;
-            this.children = children;
+        int cumulativeWeight = curNode.getWeight();
+        for (Node child : curNode.getChildren()) {
+            cumulativeWeight += getCumulativeWeight(child);
+        }
+        curNode.setCumulativeWeight(cumulativeWeight);
+        return cumulativeWeight;
+    }
+
+    static class Node {
+        private String name;
+        private Integer weight;
+        private Integer cumulativeWeight;
+        private Integer balancedCumulativeWeight;
+        private List<Node> children;
+
+        public Node(String name) {
+            this.name = name;
+            this.children = new ArrayList<>();
         }
 
-        public String getProgram() {
-            return program;
+        public Node(String name, int weight) {
+            this.name = name;
+            this.weight = weight;
+            this.children = new ArrayList<>();
         }
 
-        public int getProgramWeight() {
-            return programWeight;
+        public void addChild(Node node) {
+            children.add(node);
         }
 
-        public List<String> getChildren() {
+        public String getName() {
+            return name;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public void setWeight(Integer weight) {
+            this.weight = weight;
+        }
+
+        public Integer getCumulativeWeight() {
+            return cumulativeWeight;
+        }
+
+        public void setCumulativeWeight(Integer cumulativeWeight) {
+            this.cumulativeWeight = cumulativeWeight;
+        }
+
+        public Integer getBalancedCumulativeWeight() {
+            return balancedCumulativeWeight;
+        }
+
+        public void setBalancedCumulativeWeight(Integer balancedCumulativeWeight) {
+            this.balancedCumulativeWeight = balancedCumulativeWeight;
+        }
+
+        public List<Node> getChildren() {
             return children;
-        }
-
-        public boolean isLeaf() {
-            return children.size() == 0;
         }
     }
 }
