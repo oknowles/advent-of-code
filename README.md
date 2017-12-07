@@ -9,7 +9,7 @@ Solutions for [Advent of Code 2017](adventofcode.com)
 | [4](http://adventofcode.com/2017/day/4) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day4.java) |
 | [5](http://adventofcode.com/2017/day/5) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day5.java) |
 | [6](http://adventofcode.com/2017/day/6) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day6.java) |
-| [7](http://adventofcode.com/2017/day/7) |  |
+| [7](http://adventofcode.com/2017/day/7) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day7.java) |
 | [8](http://adventofcode.com/2017/day/8) |  |
 | [9](http://adventofcode.com/2017/day/9) |  |
 | [10](http://adventofcode.com/2017/day/10) |  |
