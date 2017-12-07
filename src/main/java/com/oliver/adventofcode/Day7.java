@@ -1,6 +1,8 @@
 package com.oliver.adventofcode;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Day7 {
 
@@ -1488,43 +1490,110 @@ public class Day7 {
             // go through list
             // we know something is at the bottom of the tree
             for (String child : instruction.getChildren()) {
-                childToParent.put(child, instruction.getParent());
+                childToParent.put(child, instruction.getProgram());
             }
         }
-        String curProgram = instructions.get(0).getParent();
+        String curProgram = instructions.get(0).getProgram();
         while (childToParent.containsKey(curProgram)) {
             curProgram = childToParent.get(curProgram);
         }
+
+        Map<String, Instruction> instructionMap = instructions.stream()
+                .collect(Collectors.toMap(
+                        Instruction::getProgram,
+                        Function.identity()));
+
+        iterateThroughTree(childToParent, instructionMap);
+
         return curProgram;
     }
 
+    private void iterateThroughTree(Map<String, String> childToParent, Map<String, Instruction> instructionMap) {
+        List<Instruction> currentLevelInstructions = getLeafPrograms();
+        List<Instruction> nextLevelInstructions = new ArrayList<>();
+
+        int level = 0;
+        while (!currentLevelInstructions.isEmpty()) {
+            int currentWeight = currentLevelInstructions.get(0).programWeight;
+            System.out.println("Level weight = " + currentWeight);
+            for (Instruction instruction : currentLevelInstructions) {
+                // update parent weight
+                String parentProgram = childToParent.get(instruction.getProgram());
+                if (parentProgram != null) {
+                    Instruction parent = instructionMap.get(parentProgram);
+                    parent.programWeight += instruction.programWeight;
+                    nextLevelInstructions.add(parent);
+                }
+            }
+            currentLevelInstructions = nextLevelInstructions;
+            nextLevelInstructions = new ArrayList<>();
+            level++;
+        }
+
+        currentLevelInstructions = getLeafPrograms();
+        nextLevelInstructions = new ArrayList<>();
+        level = 0;
+        while (!currentLevelInstructions.isEmpty()) {
+            for (Instruction instruction : currentLevelInstructions) {
+                if (currentLevelInstructions.isEmpty()) {
+                    continue;
+                }
+                int curWeight = currentLevelInstructions.get(0).getProgramWeight();
+                for (String childProgram : instruction.getChildren()) {
+                    int childWeight = instructionMap.get(childProgram).getProgramWeight();
+                    if (childWeight != curWeight) {
+                        System.out.println("Level " + level + ". Wrong weight for " + childProgram);
+                    }
+                }
+                String parentProgram = childToParent.get(instruction.getProgram());
+                if (parentProgram != null) {
+                    Instruction parent = instructionMap.get(parentProgram);
+                    nextLevelInstructions.add(parent);
+                }
+            }
+            currentLevelInstructions = nextLevelInstructions;
+            nextLevelInstructions = new ArrayList<>();
+            level++;
+        }
+    }
+
+    public List<Instruction> getLeafPrograms() {
+        return instructions.stream()
+                .filter(Instruction::isLeaf)
+                .collect(Collectors.toList());
+    }
+
     static class Instruction {
-        private String parent;
-        private int parentWeight;
+        private String program;
+        private int programWeight;
         private List<String> children;
 
-        public Instruction(String parent, int parentWeight) {
-            this.parent = parent;
-            this.parentWeight = parentWeight;
+        public Instruction(String program, int programWeight) {
+            this.program = program;
+            this.programWeight = programWeight;
             this.children = Collections.emptyList();
         }
 
-        public Instruction(String parent, int parentWeight, List<String> children) {
-            this.parent = parent;
-            this.parentWeight = parentWeight;
+        public Instruction(String program, int programWeight, List<String> children) {
+            this.program = program;
+            this.programWeight = programWeight;
             this.children = children;
         }
 
-        public String getParent() {
-            return parent;
+        public String getProgram() {
+            return program;
         }
 
-        public int getParentWeight() {
-            return parentWeight;
+        public int getProgramWeight() {
+            return programWeight;
         }
 
         public List<String> getChildren() {
             return children;
+        }
+
+        public boolean isLeaf() {
+            return children.size() == 0;
         }
     }
 }
