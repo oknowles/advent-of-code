@@ -35,44 +35,36 @@ public class Day7 {
     }
 
     private Node buildTree(List<String> instructions) {
-        Map<String, Node> parentlessNodes = new HashMap<>();
-        Map<String, Node> partialChildNodes = new HashMap<>();
-        for (String input : instructions) {
-            String[] parts = input.split(" -> ");
-            String[] parentParts = parts[0].split("\\s");
-            String name = parentParts[0];
-            int weight = Integer.parseInt(parentParts[1].replaceAll("[()]", ""));
+        Map<String, Node> nodeList = new HashMap<>();
+        instructions.forEach(instruction -> processInstruction(instruction, nodeList));
 
-            Node curNode;
-            if (partialChildNodes.containsKey(name)) {
-                // a previous child of another node so can use that and remove from map
-                curNode = partialChildNodes.get(name);
-                curNode.setWeight(weight);
-                partialChildNodes.remove(name);
-            } else {
-                // no currently known parents so add to parentless map
-                curNode = new Node(name, weight);
-                parentlessNodes.put(name, curNode);
-            }
-
-            if (parts.length > 1) {
-                List<String> children = Arrays.asList(parts[1].split(", "));
-                for (String child : children) {
-                    Node childNode;
-                    if (parentlessNodes.containsKey(child)) {
-                        // child was previously parentless but now not
-                        childNode = parentlessNodes.get(child);
-                        parentlessNodes.remove(child);
-                    } else {
-                        childNode = new Node(child);
-                        partialChildNodes.put(child, childNode);
-                    }
-
-                    curNode.addChild(childNode);
-                }
+        for (Node node : nodeList.values()) {
+            if (node.getParent() == null) {
+                return node;
             }
         }
-        return parentlessNodes.values().stream().findFirst().get();
+        return null;
+    }
+
+    private void processInstruction(String instruction, Map<String, Node> nodeList) {
+        String[] parts = instruction.split(" -> ");
+        String[] programParts = parts[0].split("\\s");
+        String name = programParts[0];
+        int weight = Integer.parseInt(programParts[1].replaceAll("[()]", ""));
+
+        Node node = nodeList.getOrDefault(name, new Node(name));
+        node.setWeight(weight);
+        nodeList.put(name, node);
+
+        if (parts.length > 1) {
+            List<String> children = Arrays.asList(parts[1].split(", "));
+            for (String child : children) {
+                Node childNode = nodeList.getOrDefault(child, new Node(child));
+                childNode.setParent(node);
+                nodeList.put(child, childNode);
+                node.addChild(childNode);
+            }
+        }
     }
 
     private Node getIncorrectNode(List<Node> nodes) {
@@ -80,10 +72,6 @@ public class Day7 {
         for (Node node : nodes) {
             int weightCount = cumulativeWeightCount.getOrDefault(node.getCumulativeWeight(), 0);
             cumulativeWeightCount.put(node.getCumulativeWeight(), weightCount + 1);
-        }
-
-        if (cumulativeWeightCount.size() == 1) {
-            return null;
         }
 
         int mostCommonWeightCount = -1;
@@ -109,10 +97,6 @@ public class Day7 {
     }
 
     private int getCumulativeWeight(Node curNode) {
-        if (curNode.getChildren().isEmpty()) {
-            return curNode.getWeight();
-        }
-
         int cumulativeWeight = curNode.getWeight();
         for (Node child : curNode.getChildren()) {
             cumulativeWeight += getCumulativeWeight(child);
@@ -126,16 +110,11 @@ public class Day7 {
         private Integer weight;
         private Integer cumulativeWeight;
         private Integer balancedCumulativeWeight;
+        private Node parent;
         private List<Node> children;
 
         public Node(String name) {
             this.name = name;
-            this.children = new ArrayList<>();
-        }
-
-        public Node(String name, int weight) {
-            this.name = name;
-            this.weight = weight;
             this.children = new ArrayList<>();
         }
 
@@ -169,6 +148,14 @@ public class Day7 {
 
         public void setBalancedCumulativeWeight(Integer balancedCumulativeWeight) {
             this.balancedCumulativeWeight = balancedCumulativeWeight;
+        }
+
+        public Node getParent() {
+            return parent;
+        }
+
+        public void setParent(Node parent) {
+            this.parent = parent;
         }
 
         public List<Node> getChildren() {
