@@ -26,8 +26,8 @@ class Day12Test extends Specification {
             int secondHalf = underTest.getNumberOfGroups()
 
         then:
-            println "firsthalf = $firstHalf"
-            println "secondHalf = $secondHalf"
+            println "first half = $firstHalf"
+            println "second half = $secondHalf"
     }
 
     def "successfully return number of connections for program 0"() {

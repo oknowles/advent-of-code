@@ -16,8 +16,8 @@ class Day11Test extends Specification {
             Day11.Result result = underTest.getFewestSteps(Arrays.asList(Utils.readFile(11)[0].split(",")))
 
         then:
-            println "firstHalf = ${result.getShortestSteps()}"
-            println "secondHalf = ${result.getMaxSteps()}"
+            println "first half = ${result.getShortestSteps()}"
+            println "second half = ${result.getMaxSteps()}"
     }
 
     @Unroll
