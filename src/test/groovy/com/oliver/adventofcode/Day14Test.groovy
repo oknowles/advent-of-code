@@ -13,9 +13,11 @@ class Day14Test extends Specification {
 
         when:
             int firstHalf = underTest.getUsedSquares()
+            int secondHalf = underTest.getRegionCount()
 
         then:
             println "first half = $firstHalf"
+            println "second half = $secondHalf"
     }
 
     def "successfully return number used squares"() {
@@ -37,6 +39,6 @@ class Day14Test extends Specification {
             int result = underTest.getRegionCount()
 
         then:
-            result == 8
+            result == 1242
     }
 }

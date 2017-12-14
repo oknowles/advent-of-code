@@ -14,7 +14,7 @@
 | [11](http://adventofcode.com/2017/day/11) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day11.java) |
 | [12](http://adventofcode.com/2017/day/12) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day12.java) |
 | [13](http://adventofcode.com/2017/day/13) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day13.java) |
-| [14](http://adventofcode.com/2017/day/14) |  |
+| [14](http://adventofcode.com/2017/day/14) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day14.java) |
 | [15](http://adventofcode.com/2017/day/15) |  |
 | [16](http://adventofcode.com/2017/day/16) |  |
 | [17](http://adventofcode.com/2017/day/17) |  |

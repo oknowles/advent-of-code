@@ -12,7 +12,6 @@ public class Day14 {
             String knotHash = Day10.fromString(rowInput).getKnotHash();
             for (Character c : knotHash.toCharArray()) {
                 String string = hexToBinary(String.valueOf(c));
-                System.out.println(c + " = " + string);
                 for (int j = 0; j < 4; j++) {
                     char square = string.charAt(j);
                     if (square == '1') {
@@ -22,15 +21,6 @@ public class Day14 {
                 }
             }
         }
-    }
-
-    private String hexToBinary(String hexString) {
-        int i = Integer.parseInt(hexString, 16);
-        StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(i));
-        while (binaryString.length() < 4) {
-            binaryString.insert(0, "0");
-        }
-        return binaryString.toString();
     }
 
     public int getUsedSquares() {
@@ -59,17 +49,27 @@ public class Day14 {
         return regionCount;
     }
 
-    private void visitRegion(boolean[][] visited, int curRow, int curCol) {
-        if (curRow < 0 || curCol < 0 || curRow >= visited.length || curCol >= visited.length) {
+    private void visitRegion(boolean[][] visited, int row, int col) {
+        if (!validPos(row, col) || !grid[row][col] || visited[row][col]) {
             return;
         }
-        if (!grid[curRow][curCol] || visited[curRow][curCol]) {
-            return;
+        visited[row][col] = true;
+        visitRegion(visited, row - 1, col);
+        visitRegion(visited, row + 1, col);
+        visitRegion(visited, row, col - 1);
+        visitRegion(visited, row, col + 1);
+    }
+
+    private boolean validPos(int row, int col) {
+        return row >= 0 && row < 128 && col >= 0 && col < 128;
+    }
+
+    private String hexToBinary(String hexString) {
+        int i = Integer.parseInt(hexString, 16);
+        StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(i));
+        while (binaryString.length() < 4) {
+            binaryString.insert(0, "0");
         }
-        visited[curRow][curCol] = true;
-        visitRegion(visited, curRow - 1, curCol);
-        visitRegion(visited, curRow + 1, curCol);
-        visitRegion(visited, curRow, curCol - 1);
-        visitRegion(visited, curRow, curCol + 1);
+        return binaryString.toString();
     }
 }
