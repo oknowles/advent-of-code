@@ -45,8 +45,8 @@ public class Utils {
         return result;
     }
 
-    public static int[] stringToArray(String input, String seperatorRegex) {
-        String[] parts = input.split(seperatorRegex);
+    public static int[] stringToArray(String input, String separatorRegex) {
+        String[] parts = input.split(separatorRegex);
         int[] result = new int[parts.length];
 
         for (int i = 0; i < parts.length; i++) {
