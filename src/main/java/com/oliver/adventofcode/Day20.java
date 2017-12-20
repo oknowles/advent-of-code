@@ -31,16 +31,17 @@ public class Day20 {
         return result;
     }
 
-    public int getClosestParticle() {
-        for (int i = 0; i < 1_000; i++) {
-            for (Particle particle : particles) {
-                particle.increment();
+    public void runIterations(int numIterations, boolean removeCollisions) {
+        for (int i = 0; i < numIterations; i++) {
+            particles.forEach(Particle::increment);
+
+            if (removeCollisions) {
+                removeCollidingParticles();
             }
-            removeCollidingParticles();
         }
+    }
 
-        System.out.println(particles.size());
-
+    public int getClosestParticle() {
         int closestParticleId = -1;
         long closestParticleDistance = Long.MAX_VALUE;
         for (Particle particle : particles) {
@@ -53,18 +54,30 @@ public class Day20 {
         return closestParticleId;
     }
 
+    public int getRemainingParticles() {
+        return particles.size();
+    }
+
     private void removeCollidingParticles() {
+        Map<String, Particle> particlePositionsMap = new HashMap<>();
         Set<Integer> particleIdsToRemove = new HashSet<>();
-        for (int particleId1 = 0; particleId1 < particles.size(); particleId1++) {
-            for (int particleId2 = particleId1 + 1; particleId2 < particles.size(); particleId2++) {
-                if (particles.get(particleId1).samePosition(particles.get(particleId2))) {
-                    particleIdsToRemove.add(particleId1);
-                    particleIdsToRemove.add(particleId2);
-                }
+        for (Particle particle : particles) {
+            String positionKey = getPositionKey(particle);
+            Particle collidingParticle = particlePositionsMap.get(positionKey);
+            if (collidingParticle != null) {
+                particleIdsToRemove.add(particle.getId());
+                particleIdsToRemove.add(collidingParticle.getId());
+            } else {
+                particlePositionsMap.put(positionKey, particle);
             }
         }
 
         particles.removeIf(particle -> particleIdsToRemove.contains(particle.getId()));
+    }
+
+    private String getPositionKey(Particle particle) {
+        long[] position = particle.getPosition();
+        return position[0] + "-" + position[1] + "-" + position[2];
     }
 
     class Particle {
@@ -84,13 +97,8 @@ public class Day20 {
             return id;
         }
 
-        public boolean samePosition(Particle particle) {
-            for (int dimension = 0; dimension < 3; dimension++) {
-                if (this.position[dimension] != particle.position[dimension]) {
-                    return false;
-                }
-            }
-            return true;
+        public long[] getPosition() {
+            return position;
         }
 
         public long getDistanceFromOrigin() {
@@ -102,18 +110,8 @@ public class Day20 {
         }
 
         public void increment() {
-            incrementVelocity();
-            incrementPosition();
-        }
-
-        public void incrementVelocity() {
             for (int dimension = 0; dimension < 3; dimension++) {
                 velocity[dimension] += acceleration[dimension];
-            }
-        }
-
-        public void incrementPosition() {
-            for (int dimension = 0; dimension < 3; dimension++) {
                 position[dimension] += velocity[dimension];
             }
         }
