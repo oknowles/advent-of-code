@@ -61,13 +61,8 @@ public class Day21 {
 
         for (int subGridX = 0; subGridX < gridSplitCount; subGridX++) {
             for (int subGridY = 0; subGridY < gridSplitCount; subGridY++) {
-                StringBuilder subGrid = new StringBuilder();
-                int rowStart = subGridX * divisor;
-                int colStart = subGridY * divisor;
-                for (int row = rowStart; row < rowStart + divisor; row++) {
-                    subGrid.append(rows[row].substring(colStart, colStart + divisor)).append("/");
-                }
-                String[] subGridRows = enhancementRules.get(removeLastElement(subGrid)).split("/");
+                String subGrid = getSubGrid(rows, divisor, subGridX, subGridY);
+                String[] subGridRows = enhancementRules.get(subGrid).split("/");
                 for (int rowCount = 0; rowCount < subGridRows.length; rowCount++) {
                     int gridRow = rowCount + subGridX * (divisor + 1);
                     newRows[gridRow].append(subGridRows[rowCount]);
@@ -75,6 +70,16 @@ public class Day21 {
             }
         }
         return newRows;
+    }
+
+    private String getSubGrid(String[] rows, int divisor, int subGridX, int subGridY) {
+        StringBuilder subGrid = new StringBuilder();
+        int rowStart = subGridX * divisor;
+        int colStart = subGridY * divisor;
+        for (int row = rowStart; row < rowStart + divisor; row++) {
+            subGrid.append(rows[row].substring(colStart, colStart + divisor)).append("/");
+        }
+        return removeLastElement(subGrid);
     }
 
     private Set<String> getTransformations(String input) {
