@@ -22,7 +22,7 @@
 | [19](http://adventofcode.com/2017/day/19) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day19.java) |
 | [20](http://adventofcode.com/2017/day/20) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day20.java) |
 | [21](http://adventofcode.com/2017/day/21) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day21.java) |
-| [22](http://adventofcode.com/2017/day/22) |  |
+| [22](http://adventofcode.com/2017/day/22) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day22.java) |
 | [23](http://adventofcode.com/2017/day/23) |  |
 | [24](http://adventofcode.com/2017/day/24) |  |
 | [25](http://adventofcode.com/2017/day/25) |  |
