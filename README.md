@@ -24,5 +24,5 @@
 | [21](http://adventofcode.com/2017/day/21) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day21.java) |
 | [22](http://adventofcode.com/2017/day/22) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day22.java) |
 | [23](http://adventofcode.com/2017/day/23) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day23.java) |
-| [24](http://adventofcode.com/2017/day/24) |  |
+| [24](http://adventofcode.com/2017/day/24) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day24.java) |
 | [25](http://adventofcode.com/2017/day/25) |  |
