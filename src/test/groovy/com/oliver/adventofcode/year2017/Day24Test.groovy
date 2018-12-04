@@ -1,7 +1,6 @@
 package com.oliver.adventofcode.year2017
 
 import com.oliver.adventofcode.Utils
-import com.oliver.adventofcode.year2017.Day24
 import spock.lang.Specification
 
 

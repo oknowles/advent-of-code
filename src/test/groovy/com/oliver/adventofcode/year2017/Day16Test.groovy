@@ -1,7 +1,6 @@
 package com.oliver.adventofcode.year2017
 
 import com.oliver.adventofcode.Utils
-import com.oliver.adventofcode.year2017.Day16
 import spock.lang.Specification
 import spock.lang.Unroll
 
