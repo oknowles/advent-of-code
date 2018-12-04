@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class Utils {
 
     public static List<String> readFile(int day) {
-        File file = getFile("Day" + day + ".txt");
+        File file = getFile("2017/Day" + day + ".txt");
         Scanner scanner = getScanner(file);
         List<String> lines = new ArrayList<>();
         while (scanner.hasNext()) {
