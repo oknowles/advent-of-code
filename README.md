@@ -1,28 +1,7 @@
-# Advent Of Code 2017
-| Day        | Solution      |
-| ---------------- | ------------- |
-| [1](http://adventofcode.com/2017/day/1) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day1.java) |
-| [2](http://adventofcode.com/2017/day/2) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day2.java) |
-| [3](http://adventofcode.com/2017/day/3) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day3.java) |
-| [4](http://adventofcode.com/2017/day/4) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day4.java) |
-| [5](http://adventofcode.com/2017/day/5) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day5.java) |
-| [6](http://adventofcode.com/2017/day/6) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day6.java) |
-| [7](http://adventofcode.com/2017/day/7) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day7.java) |
-| [8](http://adventofcode.com/2017/day/8) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day8.java) |
-| [9](http://adventofcode.com/2017/day/9) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day9.java) |
-| [10](http://adventofcode.com/2017/day/10) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day10.java) |
-| [11](http://adventofcode.com/2017/day/11) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day11.java) |
-| [12](http://adventofcode.com/2017/day/12) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day12.java) |
-| [13](http://adventofcode.com/2017/day/13) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day13.java) |
-| [14](http://adventofcode.com/2017/day/14) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day14.java) |
-| [15](http://adventofcode.com/2017/day/15) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day15.java) |
-| [16](http://adventofcode.com/2017/day/16) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day16.java) |
-| [17](http://adventofcode.com/2017/day/17) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day17.java) |
-| [18](http://adventofcode.com/2017/day/18) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day18.java) |
-| [19](http://adventofcode.com/2017/day/19) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day19.java) |
-| [20](http://adventofcode.com/2017/day/20) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day20.java) |
-| [21](http://adventofcode.com/2017/day/21) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day21.java) |
-| [22](http://adventofcode.com/2017/day/22) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day22.java) |
-| [23](http://adventofcode.com/2017/day/23) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day23.java) |
-| [24](http://adventofcode.com/2017/day/24) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day24.java) |
-| [25](http://adventofcode.com/2017/day/25) | [Java](https://github.com/oknowles/adventOfCode2017/blob/master/src/main/java/com/oliver/adventofcode/Day25.java) |
+# Advent Of Code Solutions
+
+## 2017
+[Questions](http://adventofcode.com/2017) - [Java Solutions](https://github.com/oknowles/advent-of-code/tree/master/src/main/java/com/oliver/adventofcode/year2017)
+
+## 2018
+[Questions](http://adventofcode.com/2018) - [Kotlin Solutions](https://github.com/oknowles/advent-of-code/tree/master/src/main/kotlin/com.oliver.adventofcode/year2018)
