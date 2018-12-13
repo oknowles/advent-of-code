@@ -3,7 +3,6 @@ package com.oliver.adventofcode.year2018
 import com.oliver.adventofcode.readFile
 
 class Day1(private val instructions: List<Int>) {
-
     companion object {
         @JvmStatic
         fun fromInput(): Day1 {
