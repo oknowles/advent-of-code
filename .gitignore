@@ -1,5 +1,7 @@
-.gradle/
-.idea/
-out/
-build/
-*.iml
+java-kotlin/.gradle/
+java-kotlin/out/
+java-kotlin/build/
+**/*/*.iml
+**/*/.idea/
+
+**/*/target/
