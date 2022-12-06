@@ -1,6 +1,4 @@
 use std::collections::HashSet;
-use std::io::ErrorKind::ConnectionReset;
-use std::ops::IndexMut;
 
 fn read_input(input: &str) -> Vec<&str> {
     input.lines().collect()
