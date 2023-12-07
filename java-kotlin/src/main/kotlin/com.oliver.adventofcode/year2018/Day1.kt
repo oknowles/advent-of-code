@@ -1,12 +1,13 @@
 package com.oliver.adventofcode.year2018
 
+import com.oliver.adventofcode.YEAR_2018
 import com.oliver.adventofcode.readFile
 
 class Day1(private val instructions: List<Int>) {
     companion object {
         @JvmStatic
         fun fromInput(): Day1 {
-            val instructions = readFile(1).map {
+            val instructions = readFile(1, YEAR_2018).map {
                 val value = Integer.parseInt(it.substring(1))
                 if (it[0] == '+') value else value * -1
             }

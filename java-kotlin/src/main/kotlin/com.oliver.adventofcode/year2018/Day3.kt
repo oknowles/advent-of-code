@@ -1,12 +1,13 @@
 package com.oliver.adventofcode.year2018
 
+import com.oliver.adventofcode.YEAR_2018
 import com.oliver.adventofcode.readFile
 
 class Day3(claimStrings: List<String>) {
     companion object {
         @JvmStatic
         fun fromInput(): Day3 {
-            return Day3(readFile(3))
+            return Day3(readFile(3, YEAR_2018))
         }
     }
 

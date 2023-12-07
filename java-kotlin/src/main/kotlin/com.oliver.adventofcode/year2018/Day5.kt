@@ -1,12 +1,13 @@
 package com.oliver.adventofcode.year2018
 
+import com.oliver.adventofcode.YEAR_2018
 import com.oliver.adventofcode.readFile
 
 class Day5(private val polymer: String) {
     companion object {
         @JvmStatic
         fun fromInput(): Day5 {
-            return Day5(readFile(5)[0])
+            return Day5(readFile(5, YEAR_2018)[0])
         }
         private const val CHAR_DIFF = 'a' - 'A'
     }

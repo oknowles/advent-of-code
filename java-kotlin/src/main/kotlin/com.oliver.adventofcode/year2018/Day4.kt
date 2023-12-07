@@ -1,5 +1,6 @@
 package com.oliver.adventofcode.year2018
 
+import com.oliver.adventofcode.YEAR_2018
 import com.oliver.adventofcode.readFile
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -8,7 +9,7 @@ class Day4(recordStrings: List<String>) {
     companion object {
         @JvmStatic
         fun fromInput(): Day4 {
-            return Day4(readFile(4))
+            return Day4(readFile(4, YEAR_2018))
         }
     }
     private val records = parseRecordStrings(recordStrings)
